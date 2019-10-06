@@ -9,8 +9,9 @@ void Parser::run()
     while (!stream.eof())
     {
         std::string line = readline();
-        if (line != "")
-            DEBUG(line);
+        if (line == "")
+            continue;
+        DEBUG(line);
     }
 }
 
