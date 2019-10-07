@@ -39,19 +39,6 @@ INSTRUCTION Parser::command(std::string &line)
         return inst;
         break;
     default:
-        // char buff[line.size()];
-        // strcpy(buff, line.c_str());
-        // std::vector<std::string> tokens;
-        // char *token = strtok(buff, "=;");
-        // while(token != NULL){
-        //     tokens.emplace_back(token);
-        //     token = strtok(NULL, "=;");
-        // }
-        // DEBUG("///////");
-        // DEBUG(line);
-        // for(auto i : tokens)
-        //     DEBUG(i);
-        // DEBUG("///////");
         parse_command(line, inst);
         return inst;
         break;
@@ -116,12 +103,8 @@ void Parser::parse_command(std::string &line, INSTRUCTION &inst)
         if (inst.type != INSTRUCTION_TYPE::C_TYPE_ASSIGN)
             inst.type = INSTRUCTION_TYPE::C_TYPE_COMPLETE;
     }
-    DEBUG((int)inst.type);
-    DEBUG(inst.dest_value);
-    DEBUG(inst.cmp_value);
-    DEBUG(inst.jmp_value);
-    std::cout << " // " << std::endl;
 }
+
 Parser::~Parser()
 {
 }
