@@ -4,15 +4,9 @@ Parser::Parser(std::fstream &stream) : stream(stream)
 {
 }
 
-void Parser::run()
+bool Parser::has_commands()
 {
-    while (!stream.eof())
-    {
-        std::string line = readline();
-        if (line == "")
-            continue;
-        INSTRUCTION instruction = command(line);
-    }
+    return !stream.eof();
 }
 
 std::string Parser::readline()
