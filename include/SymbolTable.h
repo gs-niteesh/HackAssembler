@@ -8,5 +8,7 @@ private:
     std::map<std::string, std::string> symbols;
 public:
     SymbolTable(std::fstream &);
+    void look_for_lables();
+    void print_table();
     ~SymbolTable();
 };

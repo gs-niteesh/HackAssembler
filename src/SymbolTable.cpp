@@ -26,3 +26,32 @@ SymbolTable::SymbolTable(std::fstream &stream) : stream(stream)
     symbols.insert({"SCREEN", "16384"});
     symbols.insert({"KBD", "24576"});
 }
+
+void SymbolTable::look_for_lables()
+{
+    auto s = stream.tellg();
+    stream.seekg(0);
+    int line_no = 0;
+    while (!stream.eof())
+    {
+        std::string line;
+        std::getline(stream, line);
+        if (line[0] == '(')
+        {
+            auto label = line.substr(1, line.size() - 3);
+            symbols.insert({label, std::to_string(line_no+1)});
+            // DEBUG(label << " -- " << std::to_string(line_no+1));
+        }
+        line_no++;
+    }
+}
+
+void SymbolTable::print_table(){
+    for(auto i : symbols){
+        DEBUG(i.first << " - " << i.second);
+    }
+}
+
+SymbolTable::~SymbolTable()
+{
+}
