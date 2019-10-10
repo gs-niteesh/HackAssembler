@@ -10,7 +10,7 @@ private:
 public:
     Parser(std::fstream &);
     bool has_commands();
-    INSTRUCTION command(std::string &);
+    INSTRUCTION command();
     ~Parser();
 private:
     std::string readline();

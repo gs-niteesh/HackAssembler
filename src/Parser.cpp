@@ -2,6 +2,7 @@
 
 Parser::Parser(std::fstream &stream) : stream(stream)
 {
+    stream.seekg(0);
 }
 
 bool Parser::has_commands()
@@ -17,8 +18,9 @@ std::string Parser::readline()
     return result;
 }
 
-INSTRUCTION Parser::command(std::string &line)
+INSTRUCTION Parser::command()
 {
+    std::string line =readline();
     INSTRUCTION inst;
     switch (line[0])
     {
