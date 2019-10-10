@@ -2,6 +2,7 @@
 
 SymbolTable::SymbolTable(std::fstream &stream) : stream(stream)
 {
+    stream.seekg(0);
     symbols.insert({"R0", "0"});
     symbols.insert({"R1", "1"});
     symbols.insert({"R2", "2"});
