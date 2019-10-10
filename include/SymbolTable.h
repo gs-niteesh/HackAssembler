@@ -9,6 +9,7 @@ private:
 public:
     SymbolTable(std::fstream &);
     void look_for_lables();
+    std::string has_label(const std::string &);
     void print_table();
     ~SymbolTable();
 };

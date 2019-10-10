@@ -39,15 +39,25 @@ void SymbolTable::look_for_lables()
         if (line[0] == '(')
         {
             auto label = line.substr(1, line.size() - 3);
-            symbols.insert({label, std::to_string(line_no+1)});
+            symbols.insert({label, std::to_string(line_no + 1)});
             // DEBUG(label << " -- " << std::to_string(line_no+1));
         }
         line_no++;
     }
 }
 
-void SymbolTable::print_table(){
-    for(auto i : symbols){
+std::string SymbolTable::has_label(const std::string &label)
+{
+    auto loc = symbols.find(label);
+    if (loc != symbols.end())
+        return (*loc).second;
+    return ""; 
+}
+
+void SymbolTable::print_table()
+{
+    for (auto i : symbols)
+    {
         DEBUG(i.first << " - " << i.second);
     }
 }
