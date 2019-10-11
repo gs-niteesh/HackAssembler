@@ -9,7 +9,8 @@ enum class INSTRUCTION_TYPE
     C_TYPE_JMP_ONLY,  // ( 1 ) 0;JMP(DIRECT JUMP)
     C_TYPE_ASSIGN, // ( 2 ) D=D+A (STORING ONLY)
     C_TYPE_COMPLETE, // ( 3 ) COMPLETE C INSTRUCTION
-    L_TYPE       // ( 4 )
+    L_TYPE,       // ( 4 )
+    INVALID
 };
 
 struct INSTRUCTION
