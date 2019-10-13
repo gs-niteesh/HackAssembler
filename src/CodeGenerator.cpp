@@ -44,7 +44,7 @@ void CodeGenerator::generate(INSTRUCTION &inst)
         }
     }
     if (inst.type != INSTRUCTION_TYPE::L_TYPE)
-        std::cout << instruction << std::endl;
+        output << instruction << std::endl;
 }
 
 CodeGenerator::~CodeGenerator()
