@@ -12,5 +12,7 @@ So if you are reading the code good luck with it ;
 ## TO RUN (LINUX):
     ./HackAssembler FILE_NAME.asm OUTPUT_FILENAME(OPTIONAL)
 Output file name will be same as input file name if ommited.
+## IF MAKE IS PRESENT
+    make
 
 Suggestions are always welcomed :)
