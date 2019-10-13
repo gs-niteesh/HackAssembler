@@ -1,7 +1,7 @@
 #include "CodeGenerator.h"
 
-CodeGenerator::CodeGenerator(const SymbolTable &symbols, std::fstream &output) : symbols(symbols),
-                                                                                output(output)
+CodeGenerator::CodeGenerator(SymbolTable &symbols, std::fstream &output) : symbols(symbols),
+                                                                                 output(output)
 {
 }
 
@@ -13,14 +13,19 @@ void CodeGenerator::generate(INSTRUCTION &inst)
     {
         if (!symbols.has_label(inst.a_value))
         {
-            sscanf(inst.a_value, "%d", &x);
+            if (is_digits(inst.a_value))
+                sscanf(inst.a_value, "%d", &x);
+            else
+            {
+                x = last_variable++;
+                symbols.add_label(inst.a_value, x);
+            }
         }
         else
         {
             sscanf(symbols.get_label(inst.a_value).c_str(), "%d", &x);
         }
         instruction += binary(x);
-        DEBUG(instruction);
     }
     else
     {
@@ -37,8 +42,9 @@ void CodeGenerator::generate(INSTRUCTION &inst)
         {
             instruction += symbols.get_cmps(inst.cmp_value) + symbols.get_dest(inst.dest_value) + symbols.get_jmp(inst.jmp_value);
         }
-        DEBUG(instruction);
     }
+    if (inst.type != INSTRUCTION_TYPE::L_TYPE)
+        std::cout << instruction << std::endl;
 }
 
 CodeGenerator::~CodeGenerator()
