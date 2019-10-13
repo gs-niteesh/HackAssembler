@@ -7,4 +7,10 @@ Tried my best to make it as modular as possible and maybe soon will be updating 
 The commits are bit messy and the code is not commented.
 So if you are reading the code good luck with it ;
 
+## TO COMPILE:
+    g++ src/Assembler.cpp src/Parser.cpp src/SymbolTable.cpp src/util.cpp src/CodeGenerator.cpp -Iinclude/ -o HackAssmbler
+## TO RUN (LINUX):
+    ./HackAssembler FILE_NAME.asm OUTPUT_FILENAME(OPTIONAL)
+Output file name will be same as input file name if ommited.
+
 Suggestions are always welcomed :)
