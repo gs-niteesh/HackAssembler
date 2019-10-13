@@ -40,3 +40,8 @@ std::string binary(int x)
     }
     return ret;
 }
+
+bool is_digits(const std::string &num)
+{
+    return num.find_first_not_of("0123456789") == std::string::npos;
+}
