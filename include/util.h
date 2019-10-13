@@ -23,8 +23,10 @@ struct INSTRUCTION
     char label[16];
 };
 
-void error(const std::string &err);
+void error(const std::string &);
 
-void handle_arguments(int argc, char **argv, std::string &source, std::string &output);
+void handle_arguments(int, char **, std::string &, std::string &);
 
-std::string binary(int x);
+std::string binary(int);
+
+bool is_digits(const std::string &);
