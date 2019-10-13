@@ -25,7 +25,7 @@ void handle_arguments(int argc, char **argv, std::string &source, std::string &o
 
 std::string binary(int x)
 {
-    int temp = 0;
+    std::size_t temp = 0;
     int i = 0;
     while (x > 0)
     {
