@@ -22,24 +22,27 @@ std::string Parser::readline()
 INSTRUCTION Parser::command()
 {
     std::string line = readline();
+    if (line == "")
+        return {.type = INSTRUCTION_TYPE::INVALID};
+
     INSTRUCTION inst;
+
     switch (line[0])
     {
     case '@':
         inst.type = INSTRUCTION_TYPE::A_TYPE;
         strcpy(inst.a_value, line.substr(1).c_str());
-        return inst;
         break;
     case '(':
         inst.type = INSTRUCTION_TYPE::L_TYPE;
-        strcpy(inst.label, line.substr(1, line.size() - 1).c_str());
-        return inst;
+        strcpy(inst.label, line.substr(1, line.size() - 2).c_str());
         break;
     default:
         parse_command(line, inst);
-        return inst;
         break;
     }
+
+    return inst;
 }
 
 /*
