@@ -96,10 +96,16 @@ void SymbolTable::look_for_lables() const
         if (line[0] == '(')
         {
             auto label = line.substr(1, line.size() - 3);
-            labels.insert({label, binary(line_no)});
+            labels.insert({label, std::to_string(line_no)});
         }
-        (line_no++);
+        else
+            (line_no++);
     }
+}
+
+void SymbolTable::add_label(const std::string &label, int var)
+{
+    labels.insert({label, std::to_string(var)});
 }
 
 bool SymbolTable::has_label(const std::string &label) const
