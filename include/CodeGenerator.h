@@ -5,7 +5,8 @@
 class CodeGenerator
 {
 private:
-    const SymbolTable &symbols; 
+    const SymbolTable &symbols;
+    int last_variable {16}; 
     std::fstream &output;
 public:
     CodeGenerator(const SymbolTable &, std::fstream &);
