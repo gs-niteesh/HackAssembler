@@ -1,6 +1,7 @@
 #include "util.h"
 
-void error(const std::string &err){
+void error(const std::string &err)
+{
     std::cerr << err << std::endl;
     exit(0);
 }
@@ -20,4 +21,22 @@ void handle_arguments(int argc, char **argv, std::string &source, std::string &o
     else
         output = source.substr(0, source.find_last_of('.'));
     output += ".hack";
+}
+
+std::string binary(int x)
+{
+    int temp = 0;
+    int i = 0;
+    while (x > 0)
+    {
+        temp += (x & 1) * pow(10, i++);
+        x >>= 1;
+    }
+    std::string ret = std::to_string(temp);
+    std::size_t size = ret.size();
+    for (int i = size; i < 16; i++)
+    {
+        ret = '0' + ret;
+    }
+    return ret;
 }
