@@ -9,10 +9,20 @@ So if you are reading the code good luck with it ;
 
 ## TO COMPILE:
     g++ src/Assembler.cpp src/Parser.cpp src/SymbolTable.cpp src/util.cpp src/CodeGenerator.cpp -Iinclude/ -o HackAssmbler
+
 ## TO RUN (LINUX):
     ./HackAssembler FILE_NAME.asm OUTPUT_FILENAME(OPTIONAL)
 Output file name will be same as input file name if ommited.
+
+## TO TEST:
+    g++ tests/main_test.cpp src/Parser.cpp src/SymbolTable.cpp src/util.cpp src/CodeGenerator.cpp -Iinclude/ -o TestAssembler
+    ./TestAssembler FILE_NAME.asm
+Make sure that the compare file is the same name as file_name but with hack extenstion to generate this file use the Assembler provided in toolsuite.
+
 ## IF MAKE IS PRESENT
+## To Build the program:
     make
+## To Test the program:
+    make test
 
 Suggestions are always welcomed :)
