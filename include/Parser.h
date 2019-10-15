@@ -15,5 +15,5 @@ public:
 private:
     std::string readline();
     void sanitize(std::string &);
-    void parse_command(std::string &, INSTRUCTION &);
+    void parse_C_command(std::string &, INSTRUCTION &);
 };
