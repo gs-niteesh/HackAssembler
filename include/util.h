@@ -14,11 +14,11 @@ enum class INSTRUCTION_TYPE
 struct INSTRUCTION
 {
     INSTRUCTION_TYPE type;
-    char a_value[36];
-    char dest_value[36];
-    char cmp_value[36];
-    char jmp_value[36];
-    char label[36];
+    std::string a_value;
+    std::string dest_value;
+    std::string cmp_value;
+    std::string jmp_value;
+    std::string label;
 };
 
 void error(const std::string &);
