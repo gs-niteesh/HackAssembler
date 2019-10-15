@@ -1,7 +1,7 @@
 #include "CodeGenerator.h"
 
-CodeGenerator::CodeGenerator(SymbolTable &symbols, std::fstream &output) : symbols(symbols),
-                                                                                 output(output)
+CodeGenerator::CodeGenerator(SymbolTable &symbols, std::ostream &output) : symbols(symbols),
+                                                                           output(output)
 {
 }
 
@@ -14,7 +14,7 @@ void CodeGenerator::generate(INSTRUCTION &inst)
         if (!symbols.has_label(inst.a_value))
         {
             if (is_digits(inst.a_value))
-                sscanf(inst.a_value, "%d", &x);
+                sscanf(inst.a_value.c_str(), "%d", &x);
             else
             {
                 x = last_variable++;
@@ -30,15 +30,15 @@ void CodeGenerator::generate(INSTRUCTION &inst)
     else
     {
         instruction = "111";
-        if (inst.type == INSTRUCTION_TYPE::C_TYPE_JMP_ONLY)
+        if (inst.dest_value == "")
         {
             instruction += symbols.get_cmps(inst.cmp_value) + "000" + symbols.get_jmp(inst.jmp_value);
         }
-        else if (inst.type == INSTRUCTION_TYPE::C_TYPE_ASSIGN)
+        else if (inst.jmp_value == "")
         {
             instruction += symbols.get_cmps(inst.cmp_value) + symbols.get_dest(inst.dest_value) + "000";
         }
-        else if (inst.type == INSTRUCTION_TYPE::C_TYPE_COMPLETE)
+        else
         {
             instruction += symbols.get_cmps(inst.cmp_value) + symbols.get_dest(inst.dest_value) + symbols.get_jmp(inst.jmp_value);
         }

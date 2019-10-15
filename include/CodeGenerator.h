@@ -7,9 +7,9 @@ class CodeGenerator
 private:
     SymbolTable &symbols;
     int last_variable {16}; 
-    std::fstream &output;
+    std::ostream &output;
 public:
-    CodeGenerator(SymbolTable &, std::fstream &);
+    CodeGenerator(SymbolTable &, std::ostream &);
     void generate(INSTRUCTION &);
     ~CodeGenerator();
 };
