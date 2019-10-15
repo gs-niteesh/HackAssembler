@@ -6,9 +6,7 @@
 enum class INSTRUCTION_TYPE
 {
     A_TYPE,      // ( 0 )
-    C_TYPE_JMP_ONLY,  // ( 1 ) 0;JMP(DIRECT JUMP)
-    C_TYPE_ASSIGN, // ( 2 ) D=D+A (STORING ONLY)
-    C_TYPE_COMPLETE, // ( 3 ) COMPLETE C INSTRUCTION
+    C_TYPE,
     L_TYPE,       // ( 4 )
     INVALID
 };
