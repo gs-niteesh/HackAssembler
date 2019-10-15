@@ -31,14 +31,15 @@ INSTRUCTION Parser::command()
     {
     case '@':
         inst.type = INSTRUCTION_TYPE::A_TYPE;
-        strcpy(inst.a_value, line.substr(1).c_str());
+        inst.a_value = line.substr(1);
         break;
     case '(':
         inst.type = INSTRUCTION_TYPE::L_TYPE;
-        strcpy(inst.label, line.substr(1, line.size() - 2).c_str());
+        inst.label = line.substr(1, line.size() - 2);
         break;
     default:
-        parse_command(line, inst);
+        inst.type = INSTRUCTION_TYPE::C_TYPE;
+        parse_C_command(line, inst);
         break;
     }
 
@@ -73,36 +74,26 @@ void Parser::sanitize(std::string &line)
     }
 }
 
-void Parser::parse_command(std::string &line, INSTRUCTION &inst)
+void Parser::parse_C_command(std::string &line, INSTRUCTION &inst)
 {
-    std::size_t pos = line.find(';');
-    std::string temp;
-    if (pos != std::string::npos)
-    {
-        strcpy(inst.jmp_value, line.substr(pos + 1).c_str());
-        temp = line.substr(0, pos);
-    }
-    else
-    {
+    std::size_t eq_pos = line.find('=');
+    std::size_t semi_pos = line.find(";");
 
-        strcpy(inst.jmp_value, "---");
-        inst.type = INSTRUCTION_TYPE::C_TYPE_ASSIGN;
-        temp = line;
-    }
-    pos = temp.find('=');
-    if (pos == std::string::npos)
+    if (eq_pos != std::string::npos)
     {
-        strcpy(inst.cmp_value, temp.c_str());
-        strcpy(inst.dest_value, "---");
-        inst.type = INSTRUCTION_TYPE::C_TYPE_JMP_ONLY;
+        inst.dest_value = line.substr(0, eq_pos);
+        if (semi_pos != std::string::npos)
+        {
+            inst.cmp_value = line.substr(eq_pos+1, semi_pos - eq_pos - 1);
+            inst.jmp_value = line.substr(semi_pos+1);
+        }else{
+            inst.cmp_value = line.substr(eq_pos+1);
+        }
+    }else{
+        inst.cmp_value = line.substr(0, semi_pos);
+        inst.jmp_value = line.substr(semi_pos + 1);
     }
-    else
-    {
-        strcpy(inst.dest_value, temp.substr(0, pos).c_str());
-        strcpy(inst.cmp_value, temp.substr(pos + 1).c_str());
-        if (inst.type != INSTRUCTION_TYPE::C_TYPE_ASSIGN)
-            inst.type = INSTRUCTION_TYPE::C_TYPE_COMPLETE;
-    }
+    // std::cout << "DEST: " << inst.dest_value << " -- CMP: " << inst.cmp_value << " -- JMP: " << inst.jmp_value << std::endl;
 }
 
 Parser::~Parser()
